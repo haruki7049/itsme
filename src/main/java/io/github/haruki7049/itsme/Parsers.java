@@ -122,7 +122,8 @@ public final class Parsers {
                 if (result.isFailure()) {
                     break;
                 }
-                results.add(result.getValue().orElse(null));
+                results.add(result.getValue().orElseThrow(() ->
+                        new IllegalStateException("Successful parse result must have a value")));
                 remaining = result.getRemaining().orElse("");
             }
             return ParseResult.success(results, remaining);
@@ -218,7 +219,8 @@ public final class Parsers {
             if (first.isFailure()) {
                 return ParseResult.success(results, input);
             }
-            results.add(first.getValue().orElse(null));
+            results.add(first.getValue().orElseThrow(() ->
+                    new IllegalStateException("Successful parse result must have a value")));
             String remaining = first.getRemaining().orElse("");
 
             while (true) {
@@ -230,7 +232,8 @@ public final class Parsers {
                 if (nextResult.isFailure()) {
                     break;
                 }
-                results.add(nextResult.getValue().orElse(null));
+                results.add(nextResult.getValue().orElseThrow(() ->
+                        new IllegalStateException("Successful parse result must have a value")));
                 remaining = nextResult.getRemaining().orElse("");
             }
             return ParseResult.success(results, remaining);

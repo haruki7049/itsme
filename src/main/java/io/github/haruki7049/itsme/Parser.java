@@ -44,7 +44,8 @@ public interface Parser<T> {
             if (result.isFailure()) {
                 return ParseResult.failure(result.getErrorMessage().orElse("Unknown error"));
             }
-            return mapper.apply(result.getValue().orElse(null))
+            return mapper.apply(result.getValue().orElseThrow(() ->
+                            new IllegalStateException("Successful parse result must have a value")))
                     .parse(result.getRemaining().orElse(""));
         };
     }
