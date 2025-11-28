@@ -1,4 +1,4 @@
-package io.github.haruki7049.itsme;
+package dev.haruki7049.itsme;
 
 /**
  * Main class for the itsme parser combinator library.
